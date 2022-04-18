@@ -1,0 +1,254 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #1a191f;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .header__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    height: 60px;
+  }
+  
+  .header__logo {
+    font-size: 32px;
+    text-decoration: none;
+    color: #ffffff;
+  }
+  
+  .header__search {
+    padding: 8px;
+    border: 2px solid #1a191f;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .movies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .movie {
+    width: 240px;
+    margin: 10px;
+    position: relative;
+  }
+  
+  .movie__cover-inner {
+    position: relative;
+    height: 360px;
+  }
+  
+  .movie__cover {
+    max-width: 100%;
+    height: 100%;
+  }
+  
+  .movie__cover--darkened {
+    background-color: #000000;
+    opacity: 0.1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .movie__cover--darkened:hover {
+    background-color: grey;
+    cursor: pointer;
+  }
+  
+  .movie__info {
+    padding: 10px 0px;
+  }
+  
+  .movie__title {
+    font-size: 16px;
+    color: #ffffff;
+  }
+  
+  .movie__category {
+    font-size: 14px;
+    color: #ffd80e;
+  }
+  
+  .movie__average {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 0;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a191f;
+    color: #ffffff;
+    font-size: 14px;
+  }
+  
+  .movie__average--green {
+    border: 1px solid green;
+  }
+  
+  .movie__average--orange {
+    border: 1px solid orange;
+  }
+  
+  .movie__average--red {
+    border: 1px solid red;
+  }
+  
+/*мой бокс*/
+
+
+  .window_box {
+    width: 80%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    border: 3px solid white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 3px black;
+    margin: 100px auto;
+    background-color: rgb(180, 175, 175);
+}
+
+.half_box {
+    width: 50%;
+    padding: 10px;
+    position: relative;
+}
+.rate {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    height: 35px;
+    width: 35px;
+    border: 2px solid white;
+    border-radius: 50%;
+    text-align: center;
+    z-index: 10;
+}
+
+.rate.red {
+  border-color: red;;
+}
+
+.rate.orange {
+  border-color: orange;
+}
+
+.rate.green {
+  border-color: green;
+}
+
+.rate_text {
+    margin-top:calc(70% - 15px);
+    color: white;
+    font-size: 15px;
+}
+
+.img_box {
+    width: 100%;
+    height: 100%;
+}
+
+.movie_img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.year {
+    padding: 20px;
+    color: #ffffff;
+    font-size: 24px;
+
+}
+
+.ganres {
+    padding: 20px;
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.description {
+    padding: 20px;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.next_info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.title_info{
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: auto;
+}
+
+.similar_item {
+  width: 20%;
+  max-height: 150px;
+  margin: 20px;
+}
+
+.name{
+  font-size: 15px;
+  color: #ffffff;
+  text-align: center;
+  overflow: hidden;
+}
+.similar_box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.img_box_item {
+  width: 100%;
+}
+
+.name_text {
+  font-size: 10px;
+  margin: 0;
+}
+
+.pagination_box {
+  display: flex;
+    width: fit-content;
+    justify-content: space-around;
+    position: relative;
+    margin: auto;
+}
+
+.pagination_page {
+    border: 2px solid white;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0 5px 0 5px;
+    color: white;
+}
