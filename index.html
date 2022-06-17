@@ -1,31 +1,100 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <title>MovieApp</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="source/body.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Movie/body</title>
 </head>
 <body>
-    <header class="container">
-        <div class="header__content">
-          <a href="index.html" class="header__logo">MovieApp</a>
-          <form>
-            <input type="text" class="header__search" placeholder="Поиск" />
-          </form>
+    <header class="header">
+        <div class="header_search_box">
+            <div class="logo_box">
+                <img class="logo" src="images_body_header/tv.png" alt="">
+                <a class="logo_link" href="index.html">MovieBox</a>
+            </div>
+            <div class="search_input_box">
+                <form class="form_header" action="#">
+                    <input class="input_field" type="text" name="name_of_film_main" id="main_search" placeholder="Что хотите посмотреть?">
+                </form>
+            </div>
+            <div class="show_more_box">
+                фильтры
+                <div class="show_more_button">
+                    <div class="layer_box">
+                        <span class="show_layer"></span>
+                        <span class="show_layer"></span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </header>
-      <div class="container">
-        <div class="movies"></div>
+        <div class="filtres">
+            <div class="filters_box">
+                <div class="search_input_box">
+                    <input class="input_field" type="text" name="name_of_film" id="filter_search" placeholder="Ключивое слово для поиска">
+                    <div class="filters_button">
+                        <a class="card_link" href="#">показать</a>
+                    </div>
+                </div>
+                <div class="select_box">
+                    <div class="select_item">
+                        Жанр:
+                        <select name="genre" id="choice_ganre">
+                            
+                        </select>
+                    </div>
+                    <div class="select_item">
+                        Тип картины:
+                        <select name="film_type" id="choice_type">
+                            <option value="ALL">Все</option>
+                            <option value="FILM">Фильмы</option>
+                            <option value="TV_SHOW">ТВ-Шоу</option>
+                            <option value="TV_SERIES">Сериалы</option>
+                            <option value="MINI_SERIES">Мини-сериалы</option>
+                        </select>
+                    </div>
+                    <div class="select_item">
+                        Минимальный рейтинг:
+                        <select name="rating" id="choice_rating">
+                            
+                        </select>
+                    </div>
+                    <div class="select_item">
+                        Год премьеры:
+                        <select name="year" id="choice_year">
+                            
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="body_slider_box">
+            <div class="slider_nav_box">
+                <ul class="slider_list">
+                    <li class="slider_num">1</li>
+                    <li class="slider_num">2</li>
+                    <li class="slider_num">3</li>
+                    <li class="slider_num">4</li>
+                    <li class="slider_num">5</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="cover_block"></div>
+    <div class="card_wrapper">
+        
+    </div>
+    <div class="main_container">
+        <h1 class="main_title">Топ-100 по популярности</h1>
+        <div class="film_box">
+            
+        </div>
         <div class="pagination_box">
-          
+            
         </div>
-      </div>
-    <script src="script.js"></script>
-    
+    </div>
+    <script src="source/classes.js"></script>
+    <script src="source/body.js"></script>
 </body>

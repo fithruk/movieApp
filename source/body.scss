@@ -1,0 +1,664 @@
+@mixin text ($fs, $mg) {
+    font-size: $fs;
+    margin-bottom: $mg;
+};
+
+@mixin links ($td, $tt, $color, $fs) {
+    text-decoration: $td;
+    text-transform: $tt;
+    color: $color;
+    font-size: $fs;
+}
+
+@keyframes fade {
+    
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes tick {
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+
+
+body {
+    margin: 0;
+    background-color: #1D1D1D;
+    font-family: 'Roboto', sans-serif;
+    color: #FFFFFF;
+    position: relative;
+}
+
+.cover_block {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    content: "";
+    visibility: hidden;
+    display: none;
+    z-index: -10;
+}
+
+.cover_block.blocked {
+    display: block;
+    z-index: 0;
+    background-color: #1D1D1D;
+}
+
+ul {
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+
+//хедер
+
+
+.header {
+    position: relative;
+    height: 100vh;
+}
+
+.header_search_box {
+    position: absolute;
+    width: 80%;
+    left: 100px;
+    top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+
+    .logo_box {
+        display:inline-flex;
+        align-items: center;
+        .logo {
+            margin-right: 10px;
+        }
+
+        .logo_link {
+            @include links(none, none, white, 16px);
+        }
+    }
+
+    .input_field {
+        
+        border: 2px solid #FFFFFF;
+        border-radius: 5px;
+        width: 525px;
+        height: 36px;
+        background-color: transparent;
+        color: #FFFFFF;
+        transition: .3s linear;
+        @include text(16px, 0);
+
+        &:focus {
+            box-shadow: inset 0 0 5px 5px #BE123C;
+        }
+    }
+
+    .show_more_box {
+        display: inline-flex;
+        align-items: center;
+    }
+    .show_more_button {
+        margin-left: 10px;
+        background-color: #BE123C;
+        border: 1px solid #BE123C;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: .3s linear;
+        
+        .show_layer {
+            content: "";
+            background-color: #FFFFFF;
+            height: 2px;
+            width: 16.8px;
+            display: block;
+
+            &:first-child {
+                margin-bottom: 5px;
+            }
+            &:last-child {
+                // margin-bottom: 5px;
+            }
+        }
+    }
+
+    .show_more_button.active {
+        background-color: #0FEFFD;
+        border: #0FEFFD;
+    }
+
+    .show_more_button.active .show_layer:first-child {
+        margin-bottom: 0;
+        transform: rotate(90deg);
+        background-color: #BE123C;
+    }
+
+    .show_more_button.active .show_layer:last-child {
+        transform: translateY(-2px);
+        background-color: #BE123C;
+    }
+
+    .show_more_button.active .layer_box {
+        transform: rotate(45deg);
+    }
+}
+
+
+// фильтры
+.filtres {
+    visibility: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    width: 80%;
+    left: 100px;
+    top: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+    opacity: 0;
+    border-top: 1px solid #BE123C;
+    transition: .5s linear;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur( 10px );
+
+    @include text(16px, 0);
+    
+    .filters_button {
+        margin-top: 10px;
+        background-color: #BE123C;
+        border: 1px solid #BE123C;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 170px;
+        height: 36px;
+        cursor: pointer;
+        transition: .3s linear;
+
+        .card_link {
+            @include links (none, uppercase, #FFFFFF, 14px);
+        }
+
+        &:hover {
+            background-color: #0FEFFD;
+        }
+    }
+}
+
+.filtres.active {
+    visibility: visible;
+    opacity: 1;
+    border-top: 1px solid #BE123C;
+    border-radius: 5px;
+}
+
+.filters_box {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+
+    .input_field {
+        border: 2px solid #FFFFFF;
+        border-radius: 5px;
+        width: 300px;
+        height: 36px;
+        background-color: transparent;
+        color: #FFFFFF;
+        transition: .3s linear;
+        @include text(16px, 0);
+
+        &:focus {
+            box-shadow: inset 0 0 5px 5px #BE123C;
+        }
+    }
+
+    .select_box {
+        width: 60%;
+        display: flex;
+        justify-content: space-around;
+
+        .select_item {
+            width: 23%;
+        }
+    }
+}
+
+
+// слайдер
+.body_slider_box {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+
+    .slider_nav_box {
+        position: absolute;
+        right: 0;
+        top: 25vh;
+        width: 36px;
+        padding-right: 5px;
+        z-index: 1;
+
+        .slider_list {
+            text-align: end;
+
+            .slider_num {
+                margin: 5px 0 5px 0;
+                cursor: pointer;
+                //list-style-type: disc;
+            }
+        }
+    }
+}
+
+.body_slider_card {
+    position: relative;
+    height: 100%;
+    display: none;
+    
+    .body_card_background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+
+    }
+}
+
+.body_card_description {
+    position: relative;
+    width: 400px;
+    top: 25vh;
+    left: 100px;
+    text-align: start;
+    
+    .card_title {
+        @include text (48px, 10px);
+    }
+
+    .card_description {
+        line-height: 18px;
+        @include text (14px, 10px);
+    }
+    
+    .card_button_box {
+        background-color: #BE123C;
+        border: 1px solid #BE123C;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 170px;
+        height: 36px;
+        cursor: pointer;
+
+        .card_link {
+            @include links (none, uppercase, #FFFFFF, 14px);
+        }
+    }
+}
+
+
+
+// типа боди
+
+.main_container {
+    width: 80%;
+    margin: auto;
+
+    .main_title {
+        text-align: center;
+    }
+}
+
+
+.film_box {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .md_item {
+        width: (250 / 1440) * 100%;
+        position: relative;
+        margin-right: 10px;
+        margin-top: 10px;
+        transition: .4s ease-in-out;
+        cursor: pointer;
+    
+        .md_slider_desc {
+            
+            margin: 215px 15px 25px 15px;
+    
+            .md_ganre {
+                display: inline-flex;
+                //width:(80 / 292) * 100%;
+                padding-left: 5px;
+                padding-right: 5px;
+                height: 25px;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #1D1D1D80;
+                border-top-right-radius: 10px; 
+                border-bottom-left-radius: 10px;      
+                background-color: #1D1D1D80;
+                color:  #0FEFFD;
+                font-weight: 400;
+                @include text (12px, 15px);
+            }
+            .md_rating {
+                display: flex;
+                margin-bottom: 15px;
+            }
+        
+            .md_title {
+                font-weight: 500;
+                @include text (18px, 15px);
+            }
+        }
+    
+        .md_main_img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: -2;
+        }
+    
+        .cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+            background-color: #1D1D1D;
+            opacity: .5;
+            font-size: 0;
+        }
+    }
+}
+
+.pagination_box {
+    display: flex;
+    width: 50%;
+    margin: 25px auto;
+    justify-content: space-around;
+    
+
+    .pagination_item {
+        font-size: 12px;
+        border: 1px solid #FFFFFF;
+        border-radius: 50%;
+        text-align: center;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        min-width: 15px;
+        min-height: 15px;
+        cursor: pointer;
+        transition: .3s linear;
+    }
+    
+    .pagination_item.active {
+        color: #1D1D1D;
+        background-color: yellow;
+    }
+}
+
+
+// модальное окно карточки
+.card_wrapper {
+    width: 90%;
+    position: absolute;
+    left: 5vw;
+  
+    background-color: #1D1D1D;
+    padding: 15px;
+    display: none;
+    z-index: -10;
+    opacity: 0;
+    transition: .4s linear;
+    animation-name: fade;
+    animation-duration: .5s;
+
+    .close_box {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 100;
+        cursor: pointer;
+        
+
+        .layer {
+            content: "";
+            display: block;
+            background-color: #FFFFFF;
+            height: 3px;
+            width: 100%;
+            position: relative;
+            top: 50%;
+            transition: .4s linear;
+
+            &:first-child {
+                transform: rotate(45deg);
+                transform-origin: 15px -3px;
+            }
+            &:last-child {
+                transform: rotate(-45deg);
+                transform-origin: 9px 3px;
+            }
+        }
+    }
+}
+.close_box:hover .layer {
+    background-color: #0FEFFD;
+}
+
+.card_wrapper.active {
+    display: block;
+    z-index: 100;
+    opacity: 1;
+    animation-name: fade;
+    animation-duration: .5s;
+}
+
+.card_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.img_box {
+    width: 30%;
+
+    .card_main_img {
+        object-fit: cover;
+        max-width: 290px;
+        max-height: 440px;
+    }
+}
+
+.main_box {
+    width: 45%;
+
+    .card_title {
+        @include text (40px, 10px);
+    }
+
+    .card_originall_title {
+        opacity: .7;
+        @include text (20px, 10px);
+    }
+
+    .card_title_about {
+        @include text (20px, 10px);
+    }
+}
+
+.main_stuff_box {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 25px 25px 25px 25px 25px 25px 25px 25px 25px 25px 25px;
+    
+    .grid_item {
+        text-align: start;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 10px;
+        @include text (13px, 0);
+    }
+    
+    .grid_item:nth-child(odd) {
+        opacity: .5;
+    }
+}
+
+.cast_box {
+    width: 25%;
+    text-align: center;
+    .rounded_rate {
+        opacity: .7;
+        @include text (40px, 10px);
+    }
+
+    .votes_number {
+        @include text (13px, 10px);
+    }
+}
+
+.main_actors {
+   max-height: 310px;
+   text-align: start;
+   overflow: hidden;
+   padding-top: 5px;
+   padding-bottom: 5px;
+    .main_list {
+        @include text (20px, 10px);
+        text-align: start;
+        .main_list_item {
+            @include text (13px, 10px);
+        }
+    }
+}
+
+.film_description {
+    padding: 15px;
+    @include text (20px, 10px);
+}
+
+//слайдер в карточке
+
+.stuff_box_slider {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+
+    .slider_card {
+        min-width: 20%;
+        height: 420px;
+        position: relative;
+        font-size: 0;
+        transition: .3s linear;
+        .sl_card_img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            top: 0;
+            left: 0;
+            
+        }
+    }
+}
+
+.slider_card:hover .about_stuff {
+    opacity: .7;
+}
+
+.about_stuff {
+    padding: 20px;
+    background-color: #1D1D1D;
+    opacity: 0;
+    position: relative;
+    height: 100%;
+    z-index: 1;
+    transition: .3s linear;
+    
+    .name {
+        @include text (15px, 10px);
+    }
+
+    .original_name {
+        opacity: .7;
+        @include text (15px, 10px);
+    }
+
+    .title_sl_card {
+        @include text (18px, 10px);
+    }
+
+    .proffession {
+        opacity: .7;
+        @include text (15px, 10px);
+
+        .info_string {
+            opacity: 1;
+            @include text (15px, 10px);
+        }
+    }
+
+    .birthday {
+        @include text (15px, 10px);
+    }
+    
+    .best_films {
+        @include text (15px, 10px);
+        .best_films_item {
+            @include text (13px, 10px);
+            margin: 10px 0 10px 0;
+        }
+    }
+}
+
+.arrows_box {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    top: 50%;
+    width: 100%;
+    z-index: 5;
+
+    .arrow {
+        opacity: 1;
+        cursor: pointer;
+        //visibility: hidden;
+        z-index: 5;
+        transition: .3s ease-out;
+    }
+    
+}
